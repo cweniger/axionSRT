@@ -1,0 +1,447 @@
+% This is a LaTeX style file to prepare IRA  proposals.% [based on IRAM proposal.sty] [KHM, autumn 2003]
+% 
+% This should be edited for each deadline ...
+%
+%\def \deadline {11 Sep 2003}
+%\def \period {15 Nov 2003 --- 15 May 2004}
+%
+%
+%\input article.sty
+%\input art11.sty
+%
+
+% modifications to the standard LaTeX styles
+\textheight 275mm
+\textwidth 186 mm
+\oddsidemargin -12mm
+\evensidemargin -12mm
+\marginparwidth 50pt
+\topmargin -29mm
+\brokenpenalty=10000
+\sloppy
+%
+% Some commands taken from A&A and elsewhere...
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{headings}
+%
+% Table of contents : redefine box size for numbers (default is too small)
+\def\l@subsection{\@dottedtocline{2}{1.5em}{4.3em}}
+\def\l@subsubsection{\@dottedtocline{3}{3.8em}{6.2em}}
+\def\l@paragraph{\@dottedtocline{4}{7.0em}{8.1em}}
+\def\l@subparagraph{\@dottedtocline{5}{10em}{10em}}
+%
+% \list parameters have been adjusted in the `thebibliography'
+% environment to the match A&A layout of References.
+\def\thebibliography#1{\section*{References\markboth
+ {REFERENCES}{REFERENCES}}\list
+% The \arabic{enumi} command has been removed because we don't use
+% numbered citations in astronomical journals.
+ {}{\setlength\labelwidth{1.4em}\leftmargin\labelwidth
+ \setlength\parsep{0pt}\setlength\itemsep{0pt}
+ \setlength{\itemindent}{-\leftmargin}
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus -.07em}
+ \sloppy
+ \sfcode`\.=1000\relax}
+\let\endthebibliography=\endlist
+%
+%\newenvironment{captions}
+\def \captions    {\newcounter{fign}\section*{Figure Captions}
+        \begin{list}{\bf Fig. \Arabic{fign}.}
+        {\usecounter{fign}\setlength{\leftmargin}{0mm}
+        \setlength{\itemindent}{0mm}}
+        \small}
+\def \endcaptions    {\end{list} \normalsize}
+%
+% Redefine \@cite so no square brackets are output.
+% Redefine \@biblabel so the label is not output in the bibliography.
+\def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\def\@biblabel#1{}
+% \vx reserves a fixed vertical space #1
+    \def \vx#1{\rule[-#1]{0mm}{#1}}
+% no page headings or numbers whatsoever
+    \pagestyle{empty}
+%
+% Specific commands
+%
+% \blank will produce the proposal form.
+%
+\newif\if@noblank\@noblanktrue \def \blank{\@noblankfalse}
+%
+\def\ful@l{~\raisebox{1mm}{\circle*{3.5}}}
+\def\chec@koff{~\raisebox{1mm}{\circle{3.5}}}
+\def\chec@kon{\if@noblank\ful@l\else\chec@koff\fi}
+\def\chec@k#1{#1\chec@kon\else\chec@koff\fi}
+\def\nochec@k#1{#1\chec@koff\else\chec@kon\fi}
+%
+%%%%%%%%%%%%% telescope selection
+
+%\newif \if@noto \@notofalse
+%\newif \if@croce \@crocefalse
+\newif \if@medi \@medifalse
+%\newif \if@coord \@coordfalse
+
+\def\parabole {\@meditrue}
+
+%\def\croce {\@crocetrue}
+%\def\paramedicina {\@meditrue}
+%\def\paranoto {\@nototrue}
+%\def\coord {\@coordtrue}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% test area for \ifcase 
+%
+%\def\croce {\let\@tel = 0}
+%\def\paramedicina {\let\@tel = 1}
+%\def\paranoto {\let\@tel = 2}
+%
+%\ifcase\@tel \@crocetrue\or  %   0
+%                           \@meditrue\or  %   1
+%                           \@nototrue\or  %   2
+%           \fi
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%
+% new section "author" allows two PIs (July 2003) -------------------------
+%
+
+\newif\if@pifirstname \@pifirstnamefalse
+\newif\if@apifirstname \@apifirstnamefalse
+
+\def\pifirstname#1{\@pifirstnametrue\gdef\@pifirstname{#1}}
+\def\pilastname#1{\gdef\@pilastname{#1}}
+\def\piinstitute#1{\gdef\@piinstitute{#1}}
+\def\pistreetandnumber#1{\gdef\@pistreetandnumber{#1}}
+\def\pizipandcity#1{\gdef\@pizipandcity{#1}}
+\def\picountry#1{\gdef\@picountry{#1}}
+\def\piphone#1{\gdef\@piphone{#1}}
+\def\pifax#1{\gdef\@pifax{#1}}
+\def\piemail#1{\gdef\@piemail{#1}}
+
+\def\apifirstname#1{\@apifirstnametrue\gdef\@apifirstname{#1}}
+\def\apilastname#1{\gdef\@apilastname{#1}}
+\def\apiinstitute#1{\gdef\@apiinstitute{#1}}
+\def\apistreetandnumber#1{\gdef\@apistreetandnumber{#1}}
+\def\apizipandcity#1{\gdef\@apizipandcity{#1}}
+\def\apicountry#1{\gdef\@apicountry{#1}}
+\def\apiphone#1{\gdef\@apiphone{#1}}
+\def\apifax#1{\gdef\@apifax{#1}}
+\def\apiemail#1{\gdef\@apiemail{#1}}
+
+\def\bpifirstname#1{\gdef\@bpifirstname{#1}}
+\def\bpilastname#1{\gdef\@bpilastname{#1}}
+\def\bpiinstitute#1{\gdef\@bpiinstitute{#1}}
+\def\bpistreetandnumber#1{\gdef\@bpistreetandnumber{#1}}
+\def\bpizipandcity#1{\gdef\@bpizipandcity{#1}}
+\def\bpicountry#1{\gdef\@bpicountry{#1}}
+\def\bpiphone#1{\gdef\@bpiphone{#1}}
+\def\bpifax#1{\gdef\@bpifax{#1}}
+\def\bpiemail#1{\gdef\@bpiemail{#1}}
+
+\def\appdef#1#2{\@ifxundefined#1{\toks@{}}{\toks@\expandafter{#1}}
+ \toks@ii{#2}\edef#1{\the\toks@\the\toks@ii}}
+\toksdef\toks@ii=\tw@ 
+\long\def\@ifxundefined#1{\@ifx{\undefined#1}}
+\def\@boolean#1#2{ 
+  \long\def#1{#2 \expandafter\boolean@true \else \expandafter\boolean@false \fi }}
+\def\@boole@def#1#{\@boolean{#1}} \@boole@def\@ifx#1{\ifx#1}
+\long\def\boolean@true#1#2{#1}
+\long\def\boolean@false#1#2{#2} 
+
+\global\let\@coauthor\@empty
+\global\let\coauthor\relax
+\def\coauthor#1#2{\appdef\@coauthor{#1 (#2); }}
+
+%
+% end section "author" -------------------------
+%
+
+
+\def\others#1{\gdef\@others{#1}}
+\def\sourcelist#1{\gdef\@sourcelist{#1}}
+\def\epoch#1{\gdef\@epoch{#1}}
+\def\techsourcelist#1{\gdef\@techsourcelist{#1}}
+\def\extendedsourcelist#1{\gdef\@extendedsourcelist{#1}}
+\def\sciabstract#1{\gdef\@sciabstract{#1}}
+\def\outabstract#1{\gdef\@outabstract{#1}}
+
+\newif\if@astronomy \@astronomyfalse
+\def\astronomy{\@astronomytrue}
+\newif\if@geodesy \@geodesyfalse
+\def\geodesy{\@geodesytrue}
+\newif\if@spacescience \@spacesciencefalse
+\def\spacescience{\@spacesciencetrue}
+\newif\if@telescopetest \@telescopetestfalse
+\def\telescopetest{\@telescopetesttrue}
+
+
+\newif\if@resubmit \@resubmitfalse
+\def\resubmit#1{\@resubmittrue\gdef\@resubmitn{#1}}
+\newif\if@continue \@continuefalse
+\def\continue#1{\@continuetrue\gdef\@continuen{#1}}
+\newif\if@studentname \@studentnamefalse
+\def\studentname#1{\@studentnametrue\gdef\@studentnamen{#1}}
+\newif\if@mediguest \@mediguestfalse
+\def\mediguest#1{\@mediguesttrue\gdef\@mediguestn{#1}}
+\newif\if@notoguest \@notoguestfalse
+\def\notoguest#1{\@notoguesttrue\gdef\@notoguestn{#1}}
+\newif\if@croceguest \@croceguestfalse
+\def\croceguest#1{\@croceguesttrue\gdef\@croceguestn{#1}}
+%
+\def\@hours{}
+\def\hours#1{\gdef\@hours{#1}}
+\def\@lstaa{}\def\@lstab{}\def\@lstac{}
+\def\@lstba{}\def\@lstbb{}\def\@lstbc{}
+\def\lsta#1#2#3{\gdef\@lstaa{#1}\gdef\@lstab{#2}\gdef\@lstac{#3}}
+\def\lstb#1#2#3{\gdef\@lstba{#1}\gdef\@lstbb{#2}\gdef\@lstbc{#3}}
+\def\@totalhoursa{}
+\def\@totalhoursb{}
+\def\totalhours#1#2{\gdef\@totalhoursa{#1}\gdef\@totalhoursb{#2}}
+\def\specials#1{\gdef\@specials{#1}}\def\@specials{}
+\def\frequencies#1#2{\gdef\@frequenciesone{#1}\gdef\@frequenciestwo{#2}}
+\def\@frequenciesone{}\def\@frequenciestwo{}
+\def\abstract#1{\gdef\@abstract{#1}}\def\@sciabstract{}
+\def\abstract#1{\gdef\@abstract{#1}}\def\@outabstract{}
+
+\def\observer#1{\gdef\@observer{#1}}\def\@observer{}
+\def\reducer#1{\gdef\@reducer{#1}}\def\@reducer{}
+
+\newif\if@receiveraandb \@receiveraandbfalse\def\receiveraandb{\@receiveraandbtrue}
+\newif\if@receivercandd \@receivercanddfalse\def\receivercandd{\@receivercanddtrue}
+\newif\if@receiveraandd \@receiveraanddfalse\def\receiveraandd{\@receiveraanddtrue}
+\newif\if@receiverbandc \@receiverbandcfalse\def\receiverbandc{\@receiverbandctrue}
+\newif\if@bolometerfirstsession 
+    \@bolometerfirstsessionfalse\def\bolometerfirstsession{\@bolometerfirstsessiontrue}
+\newif\if@bolometersecondsession 
+    \@bolometersecondsessionfalse\def\bolometersecondsession{\@bolometersecondsessiontrue}
+\newif\if@bolometer \@bolometerfalse \def\bolometer{\@bolometertrue}
+\newif\if@twomm \@twommfalse\def\twomm{\@twommtrue}
+\newif\if@atwothirty \@atwothirtyfalse\def\atwothirty{\@atwothirtytrue}
+\newif\if@btwothirty \@btwothirtyfalse\def\btwothirty{\@btwothirtytrue}
+\newif\if@pointeightmm \@pointeightmmfalse\def\pointeightmm{\@pointeightmmtrue}
+\newif\if@onemmbolo \@onemmbolofalse\def\onemmbolo{\@onemmbolotrue}
+\newif\if@diabolo \@diabolofalse\def\diabolo{\@diabolotrue}
+\newif\if@hera \@herafalse\def\hera{\@heratrue}
+
+
+\newif\if@confany \@confanyfalse\def\confany{\@confanytrue}
+\newif\if@confd \@confdfalse\def\confd{\@confdtrue}
+\newif\if@confc \@confcfalse\def\confc{\@confctrue}
+\newif\if@confb \@confbfalse\def\confb{\@confbtrue}
+\newif\if@confa \@confafalse\def\confa{\@confatrue}
+\def\confany{\@confanytrue\@confafalse\@confbfalse\@confcfalse\@confdfalse}
+
+\def\confidential#1{\gdef\@confidential{#1}}\def\@confidential{}
+
+\def\position#1{\gdef\@position{#1}}\def\@position{}
+\def\structuresize#1{\gdef\@structuresize{#1}}\def\@structuresize{}
+\def\continuumflux#1{\gdef\@continuumflux{#1}}\def\@continuumflux{}
+\def\continuumsize#1{\gdef\@continuumsize{#1}}\def\@continuumsize{}
+\def\continuumfreq#1{\gdef\@continuumfreq{#1}}\def\@continuumfreq{}
+\def\contamination#1{\gdef\@contamination{#1}}\def\@contamination{}
+\def\avoidfreq#1{\gdef\@avoidfreq{#1}}\def\@avoidfreq{}
+\def\bandres#1{\gdef\@bandres{#1}}\def\@bandres{}
+\def\linezerowidth#1{\gdef\@linezerowidth{#1}}\def\@linezerowidth{}
+\def\numberlines#1{\gdef\@numberlines{#1}}\def\@numberlines{}
+\def\linefreq#1{\gdef\@linefreq{#1}}\def\@linefreq{}
+\def\linesize#1{\gdef\@linesize{#1}}\def\@linesize{}
+\def\linestrength#1{\gdef\@linestrength{#1}}\def\@linestrength{}
+\def\configuration#1{\gdef\@configuration{#1}}\def\@configuration{}
+\def\observingtime#1{\gdef\@observingtime{#1}}\def\@observingtime{}
+\def\baselinerange#1{\gdef\@baselinerange{#1}}\def\@baselinerange{}
+\def\configlist#1{\gdef\@configlist{#1}}\def\@configlist{}
+\def\hourangles#1{\gdef\@hourangles{#1}}\def\@hourangles{}
+\def\hourangletime#1{\gdef\@hourangletime{#1}}\def\@hourangletime{}
+\def\phasecalibrators#1{\gdef\@phasecalibrators{#1}}\def\@phasecalibrators{}
+\def\ampcalibrator#1{\gdef\@ampcalibrator{#1}}\def\@ampcalibrator{}
+\def\bandpass#1{\gdef\@bandpass{#1}}\def\@bandpass{}
+\def\particulars#1{\gdef\@particulars{#1}}\def\@particulars{}
+\def\recone#1#2#3{\gdef\@reconeline{#1}\gdef\@reconefr{#2}
+   \gdef\@reconeband{#3}}
+\def\@reconeline{}\def\@reconefr{}\def\@reconeband{}
+\def\rectwo#1#2#3{\gdef\@rectwoline{#1}\gdef\@rectwofr{#2}
+   \gdef\@rectwoband{#3}}
+\def\@rectwoline{}\def\@rectwofr{}\def\@rectwoband{}
+\def\specone#1#2#3#4{\gdef\@speconewid{#1}\gdef\@speconefr{#2}
+  \gdef\@speconerec{#3}\gdef\@speconemode{#4}}
+\def\@speconewid{}\def\@speconefr{}\def\@speconerec{}\def\@speconemode{}
+\def\spectwo#1#2#3#4{\gdef\@spectwowid{#1}\gdef\@spectwofr{#2}
+   \gdef\@spectworec{#3}\gdef\@spectwomode{#4}}
+\def\@spectwowid{}\def\@spectwofr{}\def\@spectworec{}\def\@spectwomode{}
+\def\specthree#1#2#3#4{\gdef\@specthreewid{#1}\gdef\@specthreefr{#2}
+   \gdef\@specthreerec{#3}\gdef\@specthreemode{#4}}
+\def\@specthreewid{}\def\@specthreefr{}\def\@specthreerec{}\def\@specthreemode{}
+\def\specfour#1#2#3#4{\gdef\@specfourwid{#1}\gdef\@specfourfr{#2}
+   \gdef\@specfourrec{#3}\gdef\@specfourmode{#4}}
+\def\@specfourwid{}\def\@specfourfr{}\def\@specfourrec{}\def\@specfourmode{}
+\def\specfive#1#2#3#4{\gdef\@specfivewid{#1}\gdef\@specfivefr{#2}
+   \gdef\@specfiverec{#3}\gdef\@specfivemode{#4}}
+\def\@specfivewid{}\def\@specfivefr{}\def\@specfiverec{}\def\@specfivemode{}
+\def\specsix#1#2#3#4{\gdef\@specsixwid{#1}\gdef\@specsixfr{#2}
+   \gdef\@specsixrec{#3}\gdef\@specsixmode{#4}}
+\def\@specsixwid{}\def\@specsixfr{}\def\@specsixrec{}\def\@specsixmode{}
+\def\specseven#1#2#3#4{\gdef\@specsevenwid{#1}\gdef\@specsevenfr{#2}
+   \gdef\@specsevenrec{#3}\gdef\@specsevenmode{#4}}
+\def\@specsevenwid{}\def\@specsevenfr{}\def\@specsevenrec{}\def\@specsevenmode{}
+\def\speceight#1#2#3#4{\gdef\@speceightwid{#1}\gdef\@speceightfr{#2}
+   \gdef\@speceightrec{#3}\gdef\@speceightmode{#4}}
+\def\@speceightwid{}\def\@speceightfr{}\def\@speceightrec{}\def\@speceightmode{}
+%
+%  End of definitions
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Define title and authors format (\frontpage)
+%
+
+
+\def\frontpage{ \if@medi \medifront }
+
+\def\warning#1  { \if@medi \mbox{}  \else #1 \fi} 
+%
+% 
+%
+
+\def\medifront {
+\small
+\setlength{\unitlength}{1mm}
+\noindent
+\begin{picture}(185,275)(0,0)
+%
+\put(0,271){\huge \sc Istituto Nazionale di Astrofisica}
+%
+%
+\put(0,280){\makebox(0,0)[tl]{\parbox[t]{\textwidth}
+    {\large \bf PROPOSAL FOR THE INAF RADIO TELESCOPES}}}
+%
+% Title box:
+\thicklines\put(0,249){\framebox(185,18){}}
+\thinlines
+\put(3,263){\bf TITLE} 
+\if@noblank
+\put(93,254){\makebox(0,0){\parbox[t]{170mm}
+{\begin{center}\large\bf\@title\end{center}}}}
+\fi
+%
+\thicklines
+\put(0,200){\framebox(185,45) { } }
+% Investigators
+\put(2,242) {{\bf Principal Investigator:}} 
+% \put(2,215) {name, institute, address, tel., fax, e-mail:}
+
+\if@pifirstname
+
+
+ \if@noblank\put(2,235){\makebox(0,0)[tl]{\parbox[t]{85mm}{\bf \@pifirstname\ \@pilastname}}} \fi 
+ \if@noblank\put(2,231){\makebox(0,0)[tl]{\parbox[t]{85mm}{\@piinstitute}}} \fi
+ \if@noblank\put(2,227){\makebox(0,0)[tl]{\parbox[t]{85mm}{\@pistreetandnumber}}} \fi
+ \if@noblank\put(2,223){\makebox(0,0)[tl]{\parbox[t]{85mm}{\@pizipandcity\ \ ({\sc \@picountry})}}} \fi
+ \if@noblank\put(2,219){\makebox(0,0)[tl]{\parbox[t]{85mm}{Tel:\ \@piphone\ \ \ \ \ Fax:\ \@pifax}}} \fi
+ \if@noblank\put(2,215){\makebox(0,0)[tl]{\parbox[t]{85mm}{Email:\ \@piemail}}} \fi  
+ \put(100,242){{\bf Other Investigators} (name, institution):} 
+ \put(100,235){\parbox[t]{85mm}{\@coauthor}} \fi
+
+
+
+\if@noblank\put(2,202){{\bf Expected observer(s)} \@observer}
+\else\put(2,204){\bf Expected observer(s)}\fi
+%
+
+%
+% Keywords ?
+\put(0,192){Project type ?}
+\put (30,192){Astronomy \,\chec@k{\if@astronomy}}
+\put (57,192){Geodesy \,\chec@k{\if@geodesy}}
+\put (82,192){Space Science \,\chec@k{\if@spacescience}}
+\put (115,192){Telescope Test \,\chec@k{\if@telescopetest}}
+
+% Resubmission ?
+\put(0,187){Is this a resubmission of a previous proposal ?}
+\put(81,187){  no \nochec@k{\if@resubmit} }
+\put(93,187){  yes \chec@k{\if@resubmit} --}
+\put(108,187){\makebox(70,20)[br]{  proposal number(s): \dotfill}}
+\if@noblank\if@resubmit\put(142,187.6){\@resubmitn}\fi \fi
+%
+% Continuation ?
+\put(0,182){Is this a continuation  of (a) previous proposal(s) ?}
+\put(81,182){  no \nochec@k{\if@continue} }
+\put(93,182){  yes \chec@k{\if@continue} --}
+\put(108,182){\makebox(70,20)[br]{  proposal number(s): \dotfill}}
+\if@noblank\if@continue\put(142,182.5){\@continuen}\fi\fi
+%
+% Ph.D. involved ?
+\put(0,177){Is this part of a Ph.D. project ?}
+\put(81,177){  no \nochec@k{\if@studentname} }
+\put(93,177){  yes \chec@k{\if@studentname} --}
+\put(108,177){\makebox(70,20)[br]{  Student's Name: \dotfill}}
+\if@noblank\if@studentname\put(142,178){\@studentnamen}\fi\fi
+%
+\put(0,173){\line(1,0){185}}
+% Hours requested
+\put(0,168.5){{\bf Hours} requested for this period:}
+\thicklines
+\if@noblank\put(26,159){\framebox(16,7){\bf \@hours} }
+\else\put(26,159){\framebox(16,7){} }
+\fi
+\thinlines
+\put(53,168.5){LST range(s):}
+\if@noblank\put(85,168.5){  from: \@lstaa}\else\put(85,168.5){  from:}\fi
+\if@noblank\put(112,168.5){  to: \@lstab}\else\put(112,168.5){  to:}\fi
+\if@noblank\put(132,168.5){  number of intervals: \@lstac}
+\else\put(132,165){  number of intervals:}\fi
+\if@noblank\put( 85,160){  from: \@lstba}\else\put( 85,160){  from:}\fi
+\if@noblank\put(112,160){  to: \@lstbb}\else\put(112,160){  to:}\fi
+\if@noblank\put(132,160){  number of intervals: \@lstbc}
+\else\put(132,160){  number of intervals:}\fi
+%
+\put(0,155){\line(1,0){185}}
+%
+\put(0,148){{\bf Number of hours} foreseen 
+for full completion of this proposal:}
+\if@noblank\put(102,145.5){\framebox(15,7){\@totalhoursa}}
+\else\put(102,145.5){\framebox(15,7){ }}\fi
+\put(117,148){  of which}
+\if@noblank\put(135,145.5){\framebox(15,7){\@totalhoursb}}
+\else\put(135,145.5){\framebox(15,7){}}\fi
+\put(150,148){  were already allocated}
+\put(0,143){\line(1,0){185}}
+
+
+%
+%
+% Science abstract box:
+\thicklines\put(0,71){\framebox(184,69){}}
+\thinlines
+\put(3,135){\bf SCIENCE ABSTRACT}
+\if@noblank
+\put(7,134){\makebox(0,0)[tl]{\parbox[t]{174mm}{\@sciabstract}}}
+\fi
+% 
+
+%
+%
+% Outreach abstract box:
+\thicklines\put(0,16){\framebox(184,52){}}
+\thinlines
+\put(3,64){\bf OUTREACH ABSTRACT (mandatory)}
+\if@noblank
+\put(7,63){\makebox(0,0)[tl]{\parbox[t]{174mm}{\@outabstract}}}
+\fi
+% 
+
+\put(0,10){\em join to this form: scientific aims $\leq 2$ typed pages
+and $\leq 2$ of Figs., Tables and list of related publications}
+%\put(165,1){\em $^*$imperatively}
+\end{picture}  }
+%
+%
+%
+%
